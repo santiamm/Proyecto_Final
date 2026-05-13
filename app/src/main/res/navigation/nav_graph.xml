@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.proyecto_final.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_reportListFragment"
+            app:destination="@id/reportListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.proyecto_final.ui.LoginFragment"
@@ -28,4 +32,9 @@
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/reportListFragment"
+        android:name="com.example.proyecto_final.ui.ReportListFragment"
+        android:label="fragment_report_list"
+        tools:layout="@layout/fragment_report_list" />
 </navigation>
