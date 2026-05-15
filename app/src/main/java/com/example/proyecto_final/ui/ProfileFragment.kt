@@ -1,17 +1,17 @@
 package com.example.proyecto_final.ui
+
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final.R
 
-class ReportListFragment : Fragment(R.layout.fragment_report_list) {
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Al tocar el reporte, va a los detalles
-        view.findViewById<LinearLayout>(R.id.itemReporte).setOnClickListener {
-            findNavController().navigate(R.id.action_reportListFragment_to_reportDetailFragment)
+        view.findViewById<Button>(R.id.btnCerrarSesion).setOnClickListener {
+            findNavController().navigate(R.id.loginFragment)
         }
     }
 }

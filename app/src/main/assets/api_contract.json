@@ -1,0 +1,13 @@
+{
+  "reportes": [
+    {
+      "id": 1,
+      "titulo": "Falla luminaria parque",
+      "descripcion": "Lámpara apagada hace 3 días en la Calle 15",
+      "categoria": "Infraestructura",
+      "prioridad": "Alta",
+      "estado": "Abierto",
+      "fecha": "2026-05-15"
+    }
+  ]
+}

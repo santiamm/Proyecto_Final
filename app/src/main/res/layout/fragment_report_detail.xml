@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/bg_civico">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detalle del Caso"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_main"
+        android:layout_marginBottom="24dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#ffffff"
+        android:padding="16dp"
+        android:layout_marginBottom="24dp"
+        android:elevation="2dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Falla luminaria parque"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_main"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estado: Abierto"
+            android:textSize="16sp"
+            android:textColor="#f59e0b"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lámpara apagada hace 3 días en la Calle 15. Requiere revisión urgente por seguridad en la noche."
+            android:textSize="16sp"
+            android:textColor="@color/text_main"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnResolver"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Marcar como Resuelto"
+        android:backgroundTint="#16a34a"/>
+</LinearLayout>

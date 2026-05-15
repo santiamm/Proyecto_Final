@@ -3,38 +3,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.proyecto_final.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_reportListFragment"
-            app:destination="@id/reportListFragment" />
+        <action android:id="@+id/action_homeFragment_to_reportListFragment" app:destination="@id/reportListFragment" />
+        <action android:id="@+id/action_homeFragment_to_createReportFragment" app:destination="@id/createReportFragment" />
+        <action android:id="@+id/action_homeFragment_to_profileFragment" app:destination="@id/profileFragment" />
+        <action android:id="@+id/action_homeFragment_to_settingsFragment" app:destination="@id/settingsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.proyecto_final.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+        <action android:id="@+id/action_loginFragment_to_homeFragment" app:destination="@id/homeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.proyecto_final.ui.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
-        <action
-            android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+        <action android:id="@+id/action_splashFragment_to_loginFragment" app:destination="@id/loginFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/reportListFragment"
         android:name="com.example.proyecto_final.ui.ReportListFragment"
         android:label="fragment_report_list"
-        tools:layout="@layout/fragment_report_list" />
+        tools:layout="@layout/fragment_report_list" >
+        <action
+            android:id="@+id/action_reportListFragment_to_reportDetailFragment"
+            app:destination="@id/reportDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createReportFragment"
+        android:name="com.example.proyecto_final.ui.CreateReportFragment"
+        android:label="fragment_create_report"
+        tools:layout="@layout/fragment_create_report" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.proyecto_final.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/reportDetailFragment"
+        android:name="com.example.proyecto_final.ui.ReportDetailFragment"
+        android:label="fragment_report_detail"
+        tools:layout="@layout/fragment_report_detail" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.proyecto_final.ui.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

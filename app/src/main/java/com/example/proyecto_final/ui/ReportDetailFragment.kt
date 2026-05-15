@@ -1,17 +1,19 @@
 package com.example.proyecto_final.ui
+
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
+import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final.R
 
-class ReportListFragment : Fragment(R.layout.fragment_report_list) {
+class ReportDetailFragment : Fragment(R.layout.fragment_report_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Al tocar el reporte, va a los detalles
-        view.findViewById<LinearLayout>(R.id.itemReporte).setOnClickListener {
-            findNavController().navigate(R.id.action_reportListFragment_to_reportDetailFragment)
+        view.findViewById<Button>(R.id.btnResolver).setOnClickListener {
+            Toast.makeText(requireContext(), "Caso marcado como resuelto", Toast.LENGTH_SHORT).show()
+            findNavController().navigateUp()
         }
     }
 }

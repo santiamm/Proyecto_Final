@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HomeFragment">
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/bg_civico"
+    android:gravity="center_horizontal">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sistema de Reportes Vecinales"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/text_main"
+        android:layout_marginBottom="32dp" />
 
-</FrameLayout>
+    <Button android:id="@+id/btnCrear" android:layout_width="match_parent" android:layout_height="60dp" android:text="Nuevo Reporte" android:backgroundTint="@color/primary_civico" android:layout_marginBottom="12dp" />
+    <Button android:id="@+id/btnLista" android:layout_width="match_parent" android:layout_height="60dp" android:text="Ver Reportes" android:backgroundTint="@color/primary_civico" android:layout_marginBottom="12dp" />
+    <Button android:id="@+id/btnPerfil" android:layout_width="match_parent" android:layout_height="60dp" android:text="Mi Perfil" android:backgroundTint="@color/primary_civico" android:layout_marginBottom="12dp" />
+    <Button android:id="@+id/btnAjustes" android:layout_width="match_parent" android:layout_height="60dp" android:text="Configuración" android:backgroundTint="@color/primary_civico" />
+
+</LinearLayout>
