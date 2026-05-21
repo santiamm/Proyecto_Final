@@ -1,25 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:background="@color/bg_civico"
-    android:gravity="center_horizontal">
+    android:background="#eef3fb"
+    android:fillViewport="true">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sistema de Reportes Vecinales"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textColor="@color/text_main"
-        android:layout_marginBottom="32dp" />
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <Button android:id="@+id/btnCrear" android:layout_width="match_parent" android:layout_height="60dp" android:text="Nuevo Reporte" android:backgroundTint="@color/primary_civico" android:layout_marginBottom="12dp" />
-    <Button android:id="@+id/btnLista" android:layout_width="match_parent" android:layout_height="60dp" android:text="Ver Reportes" android:backgroundTint="@color/primary_civico" android:layout_marginBottom="12dp" />
-    <Button android:id="@+id/btnPerfil" android:layout_width="match_parent" android:layout_height="60dp" android:text="Mi Perfil" android:backgroundTint="@color/primary_civico" android:layout_marginBottom="12dp" />
-    <Button android:id="@+id/btnAjustes" android:layout_width="match_parent" android:layout_height="60dp" android:text="Configuración" android:backgroundTint="@color/primary_civico" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#2563eb"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="8dp"
+            android:layout_marginBottom="24dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="28dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nodo Cívico"
+                    android:textColor="#ffffff"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Sistema vecinal de reportes. Mantén tu comunidad sincronizada y segura."
+                    android:textColor="#e0e7ff"
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="4dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resumen de actividad"
+            android:textColor="#182230"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="28dp"
+            android:weightSum="3">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="#ffffff" app:cardCornerRadius="16dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp" android:gravity="center">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="14" android:textColor="#16a34a" android:textSize="26sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sincronizados" android:textColor="#64748b" android:textSize="11sp" android:textStyle="bold" android:layout_marginTop="2dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="#ffffff" app:cardCornerRadius="16dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp" android:gravity="center">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4" android:textColor="#f59e0b" android:textSize="26sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pendientes" android:textColor="#64748b" android:textSize="11sp" android:textStyle="bold" android:layout_marginTop="2dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                app:cardBackgroundColor="#ffffff" app:cardCornerRadius="16dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp" android:gravity="center">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18" android:textColor="#2563eb" android:textSize="26sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Totales" android:textColor="#64748b" android:textSize="11sp" android:textStyle="bold" android:layout_marginTop="2dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gestión y Configuración"
+            android:textColor="#182230"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="2">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardCrear"
+                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp"
+                android:clickable="true" android:focusable="true" android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="#ffffff" app:cardCornerRadius="24dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="20dp">
+                    <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/circle_bg" android:text="+" android:textColor="#ffffff" android:textSize="24sp" android:textStyle="bold" android:gravity="center" android:layout_marginBottom="16dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Registrar" android:textColor="#182230" android:textSize="18sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Crea una incidencia offline" android:textColor="#64748b" android:textSize="13sp" android:layout_marginTop="4dp" android:lineSpacingExtra="2dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardLista"
+                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp"
+                android:clickable="true" android:focusable="true" android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="#ffffff" app:cardCornerRadius="24dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="20dp">
+                    <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/circle_bg" android:text="≡" android:textColor="#ffffff" android:textSize="24sp" android:textStyle="bold" android:gravity="center" android:layout_marginBottom="16dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Historial" android:textColor="#182230" android:textSize="18sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Explora los reportes locales" android:textColor="#64748b" android:textSize="13sp" android:layout_marginTop="4dp" android:lineSpacingExtra="2dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardAjustes"
+                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp"
+                android:clickable="true" android:focusable="true" android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="#ffffff" app:cardCornerRadius="24dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="20dp">
+                    <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/circle_bg" android:backgroundTint="#64748b" android:text="⚙" android:textColor="#ffffff" android:textSize="24sp" android:textStyle="bold" android:gravity="center" android:layout_marginBottom="16dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ajustes" android:textColor="#182230" android:textSize="18sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Personaliza la app a tu gusto" android:textColor="#64748b" android:textSize="13sp" android:layout_marginTop="4dp" android:lineSpacingExtra="2dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardPerfil"
+                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="6dp"
+                android:clickable="true" android:focusable="true" android:foreground="?android:attr/selectableItemBackground"
+                app:cardBackgroundColor="#ffffff" app:cardCornerRadius="24dp" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="20dp">
+                    <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/circle_bg" android:backgroundTint="#64748b" android:text="👤" android:textColor="#ffffff" android:textSize="20sp" android:textStyle="bold" android:gravity="center" android:layout_marginBottom="16dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cuenta" android:textColor="#182230" android:textSize="18sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tus datos de sesión" android:textColor="#64748b" android:textSize="13sp" android:layout_marginTop="4dp" android:lineSpacingExtra="2dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </GridLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

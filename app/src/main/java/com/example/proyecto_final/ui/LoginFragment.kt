@@ -11,7 +11,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.btnLogin).setOnClickListener {
+        view.findViewById<Button>(R.id.btnIngresar).setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        }
+        view.findViewById<Button>(R.id.btnRegistrar).setOnClickListener {
+            // Actualmente redirige al Home para pruebas, aquí Estiven conectará el ViewModel de registro
             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
     }

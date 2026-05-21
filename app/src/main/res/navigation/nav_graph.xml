@@ -6,63 +6,108 @@
     app:startDestination="@id/splashFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.proyecto_final.ui.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action android:id="@+id/action_homeFragment_to_reportListFragment" app:destination="@id/reportListFragment" />
-        <action android:id="@+id/action_homeFragment_to_createReportFragment" app:destination="@id/createReportFragment" />
-        <action android:id="@+id/action_homeFragment_to_profileFragment" app:destination="@id/profileFragment" />
-        <action android:id="@+id/action_homeFragment_to_settingsFragment" app:destination="@id/settingsFragment" />
+        android:id="@+id/splashFragment"
+        android:name="com.example.proyecto_final.ui.SplashFragment"
+        android:label="Splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popEnterAnim="@anim/pop_zoom_in"
+            app:popExitAnim="@anim/pop_zoom_out"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.proyecto_final.ui.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action android:id="@+id/action_loginFragment_to_homeFragment" app:destination="@id/homeFragment" />
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popEnterAnim="@anim/pop_zoom_in"
+            app:popExitAnim="@anim/pop_zoom_out"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.example.proyecto_final.ui.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
-        <action android:id="@+id/action_splashFragment_to_loginFragment" app:destination="@id/loginFragment" />
+        android:id="@+id/homeFragment"
+        android:name="com.example.proyecto_final.ui.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_reportListFragment"
+            app:destination="@id/reportListFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popEnterAnim="@anim/pop_zoom_in"
+            app:popExitAnim="@anim/pop_zoom_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_createReportFragment"
+            app:destination="@id/createReportFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popEnterAnim="@anim/pop_zoom_in"
+            app:popExitAnim="@anim/pop_zoom_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popEnterAnim="@anim/pop_zoom_in"
+            app:popExitAnim="@anim/pop_zoom_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popEnterAnim="@anim/pop_zoom_in"
+            app:popExitAnim="@anim/pop_zoom_out" />
     </fragment>
 
     <fragment
         android:id="@+id/reportListFragment"
         android:name="com.example.proyecto_final.ui.ReportListFragment"
-        android:label="fragment_report_list"
-        tools:layout="@layout/fragment_report_list" >
+        android:label="Reportes"
+        tools:layout="@layout/fragment_report_list">
         <action
             android:id="@+id/action_reportListFragment_to_reportDetailFragment"
-            app:destination="@id/reportDetailFragment" />
+            app:destination="@id/reportDetailFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popEnterAnim="@anim/pop_zoom_in"
+            app:popExitAnim="@anim/pop_zoom_out" />
     </fragment>
 
     <fragment
         android:id="@+id/createReportFragment"
         android:name="com.example.proyecto_final.ui.CreateReportFragment"
-        android:label="fragment_create_report"
+        android:label="Nuevo Reporte"
         tools:layout="@layout/fragment_create_report" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.proyecto_final.ui.SettingsFragment"
+        android:label="Ajustes"
+        tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.proyecto_final.ui.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Perfil"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/reportDetailFragment"
         android:name="com.example.proyecto_final.ui.ReportDetailFragment"
-        android:label="fragment_report_detail"
+        android:label="Detalle"
         tools:layout="@layout/fragment_report_detail" />
 
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.proyecto_final.ui.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
 </navigation>
