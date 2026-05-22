@@ -15,9 +15,10 @@
         android:layout_marginBottom="24dp">
         <ImageButton
             android:id="@+id/btnBackLista"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Volver"
             android:src="@android:drawable/ic_menu_revert"
             app:tint="#182230" />
         <TextView
@@ -30,67 +31,10 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardReporteEjemplo"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewReports"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="#ffffff"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:background="@drawable/circle_bg"
-                android:backgroundTint="#2563eb"
-                android:gravity="center"
-                android:text="L"
-                android:textColor="#ffffff"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Luminaria dañada"
-                    android:textColor="#182230"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Prioridad alta · Hace 2h"
-                    android:textColor="#64748b"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#eef3fb"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="6dp"
-                android:text="Abierto"
-                android:textColor="#2563eb"
-                android:textSize="11sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="24dp"/>
 </LinearLayout>
