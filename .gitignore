@@ -1,16 +1,23 @@
+# Android Studio / IntelliJ local files
 *.iml
-.gradle
-/local.properties
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-**/.idea/**
+
+# Local SDK and build output
+.gradle/
+/local.properties
+/build/
+/captures/
+.externalNativeBuild/
+.cxx/
+
+# OS-generated files
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
