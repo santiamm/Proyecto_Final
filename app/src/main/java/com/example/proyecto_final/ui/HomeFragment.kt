@@ -2,29 +2,72 @@ package com.example.proyecto_final.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.cardview.widget.CardView
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.example.proyecto_final.NodoCivicoApp
 import com.example.proyecto_final.R
+import com.example.proyecto_final.viewmodel.AppViewModelFactory
+import com.example.proyecto_final.viewmodel.ReportViewModel
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
+
+    private val viewModel: ReportViewModel by viewModels {
+        AppViewModelFactory((requireActivity().application as NodoCivicoApp).repository)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<CardView>(R.id.cardLista).setOnClickListener {
+        val tvTotales = view.findViewById<TextView>(R.id.tvTotales)
+        val tvPendientes = view.findViewById<TextView>(R.id.tvPendientes)
+        val tvSincronizados = view.findViewById<TextView>(R.id.tvSincronizados)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.allReports.collect { reports ->
+                    tvTotales.text = reports.size.toString()
+                    tvPendientes.text = reports.count { it.status == "Abierto" || it.status == "En proceso" }.toString()
+                    tvSincronizados.text = reports.count { it.status == "Cerrado" }.toString()
+                }
+            }
+        }
+
+        // Card de Historial
+        view.findViewById<View>(R.id.cardHistorial).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_reportListFragment)
         }
 
-        view.findViewById<CardView>(R.id.cardCrear).setOnClickListener {
+        // Card de Reportar
+        view.findViewById<View>(R.id.cardReportar).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_createReportFragment)
         }
 
-        view.findViewById<CardView>(R.id.cardAjustes).setOnClickListener {
+        // Card de Perfil
+        view.findViewById<View>(R.id.cardPerfil).setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+        }
+
+        // Card de Configuración (si la usas)
+        view.findViewById<View>(R.id.cardConfig)?.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
         }
 
-        view.findViewById<CardView>(R.id.cardPerfil).setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+        // Botón de settings (esquina superior derecha)
+        view.findViewById<ImageButton>(R.id.btnSettings).setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+        }
+
+        // Botón de sincronización
+        view.findViewById<Button>(R.id.btnSync).setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_syncFragment)
         }
     }
 }

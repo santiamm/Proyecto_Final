@@ -16,123 +16,44 @@ import com.example.proyecto_final.viewmodel.ReportViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 
-class CreateReportFragment :
-    Fragment(R.layout.fragment_create_report) {
+class CreateReportFragment : Fragment(R.layout.fragment_create_report) {
 
     private val viewModel: ReportViewModel by viewModels {
-
-        AppViewModelFactory(
-            (requireActivity().application as NodoCivicoApp).repository
-        )
+        AppViewModelFactory((requireActivity().application as NodoCivicoApp).repository)
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?
-    ) {
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<ImageButton>(
-            R.id.btnBackCrear
-        ).setOnClickListener {
-
+        view.findViewById<ImageButton>(R.id.btnBackCrear).setOnClickListener {
             findNavController().navigateUp()
         }
 
-        val etTitulo =
-            view.findViewById<TextInputEditText>(
-                R.id.etTitulo
-            )
-
-        val etDescripcion =
-            view.findViewById<TextInputEditText>(
-                R.id.etDescripcion
-            )
-
-        val spinnerCategoria =
-            view.findViewById<MaterialAutoCompleteTextView>(
-                R.id.spinnerCategoria
-            )
-
-        val spinnerPrioridad =
-            view.findViewById<MaterialAutoCompleteTextView>(
-                R.id.spinnerPrioridad
-            )
-
-        val btnGuardar =
-            view.findViewById<Button>(
-                R.id.btnGuardarReporte
-            )
+        val etTitulo = view.findViewById<TextInputEditText>(R.id.etTitulo)
+        val etDescripcion = view.findViewById<TextInputEditText>(R.id.etDescripcion)
+        val spinnerCategoria = view.findViewById<MaterialAutoCompleteTextView>(R.id.spinnerCategoria)
+        val spinnerPrioridad = view.findViewById<MaterialAutoCompleteTextView>(R.id.spinnerPrioridad)
+        val btnGuardar = view.findViewById<Button>(R.id.btnGuardarReporte)
 
         spinnerCategoria.setAdapter(
-            ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_dropdown_item_1line,
-                arrayOf(
-                    "Alumbrado Público",
-                    "Vías e Infraestructura",
-                    "Seguridad Comunitaria",
-                    "Aseo Urbano"
-                )
-            )
+            ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, arrayOf("Alumbrado Público", "Vías e Infraestructura", "Seguridad Comunitaria", "Aseo Urbano"))
         )
 
         spinnerPrioridad.setAdapter(
-            ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_dropdown_item_1line,
-                arrayOf(
-                    "Baja",
-                    "Media",
-                    "Alta",
-                    "Crítica"
-                )
-            )
+            ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, arrayOf("Baja", "Media", "Alta", "Crítica"))
         )
 
         btnGuardar.setOnClickListener {
+            val titulo = etTitulo.text.toString().trim()
+            val desc = etDescripcion.text.toString().trim()
+            val cat = spinnerCategoria.text.toString()
+            val prio = spinnerPrioridad.text.toString()
 
-            val titulo =
-                etTitulo.text.toString().trim()
-
-            val desc =
-                etDescripcion.text.toString().trim()
-
-            val cat =
-                spinnerCategoria.text.toString()
-
-            val prio =
-                spinnerPrioridad.text.toString()
-
-            if (
-                titulo.isEmpty() ||
-                desc.isEmpty() ||
-                cat.isEmpty() ||
-                prio.isEmpty()
-            ) {
-
-                Toast.makeText(
-                    requireContext(),
-                    "Completa todos los campos",
-                    Toast.LENGTH_SHORT
-                ).show()
-
+            if (titulo.isEmpty() || desc.isEmpty() || cat.isEmpty() || prio.isEmpty()) {
+                Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show()
             } else {
-
-                viewModel.saveReport(
-                    titulo,
-                    desc,
-                    cat,
-                    prio
-                ) {
-
-                    Toast.makeText(
-                        requireContext(),
-                        "Reporte guardado",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
+                viewModel.saveReport(titulo, desc, cat, prio) {
+                    Toast.makeText(requireContext(), "Reporte guardado localmente", Toast.LENGTH_SHORT).show()
                     findNavController().navigateUp()
                 }
             }

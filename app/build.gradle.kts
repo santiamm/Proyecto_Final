@@ -5,11 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.proyecto_final"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.proyecto_final"

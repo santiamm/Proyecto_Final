@@ -1,0 +1,49 @@
+package com.example.proyecto_final.ui
+
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.example.proyecto_final.NodoCivicoApp
+import com.example.proyecto_final.R
+import com.example.proyecto_final.viewmodel.AppViewModelFactory
+import com.example.proyecto_final.viewmodel.ReportViewModel
+import kotlinx.coroutines.launch
+
+class SyncFragment : Fragment(R.layout.fragment_sync) {
+
+    private val viewModel: ReportViewModel by viewModels {
+        AppViewModelFactory((requireActivity().application as NodoCivicoApp).repository)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<ImageButton>(R.id.btnBackSync).setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        val tvSyncStatus = view.findViewById<TextView>(R.id.tvSyncStatus)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.allReports.collect { reports ->
+                    val pendientes = reports.count { it.status == "Abierto" }
+                    tvSyncStatus.text = "Pendientes de sincronización: $pendientes reportes locales"
+                }
+            }
+        }
+
+        view.findViewById<Button>(R.id.btnSyncNow).setOnClickListener {
+            Toast.makeText(requireContext(), "Sincronizando con el servidor (Entregable 3)...", Toast.LENGTH_SHORT).show()
+        }
+    }
+}
