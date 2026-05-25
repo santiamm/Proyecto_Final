@@ -42,6 +42,10 @@ class ReportListFragment : Fragment(R.layout.fragment_report_list) {
                 putInt("reportId", report.id)
                 putString("title", report.title)
                 putString("desc", report.description)
+                putString("cat", report.category)
+                putString("prio", report.priority)
+                putString("status", report.status)
+                putLong("timestamp", report.timestamp)
             }
             findNavController().navigate(R.id.action_reportListFragment_to_reportDetailFragment, bundle)
         }

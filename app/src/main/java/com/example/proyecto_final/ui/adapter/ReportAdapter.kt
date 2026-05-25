@@ -8,6 +8,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.R
 import com.example.proyecto_final.data.ReportEntity
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 class ReportAdapter(
     private var reports: List<ReportEntity>,
@@ -19,6 +23,7 @@ class ReportAdapter(
         val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         val tvSubtitle: TextView = itemView.findViewById(R.id.tvSubtitle)
         val tvStatus: TextView = itemView.findViewById(R.id.tvStatus)
+        val tvTimestamp: TextView = itemView.findViewById(R.id.tvTimestamp)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportViewHolder {
@@ -48,6 +53,8 @@ class ReportAdapter(
         holder.tvStatus.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, bgColor))
 
         holder.tvInitial.text = report.title.take(1).uppercase()
+        holder.tvTimestamp.text = getTimeAgo(report.timestamp)
+
         holder.itemView.setOnClickListener { onItemClick(report) }
     }
 
@@ -56,5 +63,31 @@ class ReportAdapter(
     fun updateData(newReports: List<ReportEntity>) {
         reports = newReports
         notifyDataSetChanged()
+    }
+
+    private fun getTimeAgo(timestamp: Long): String {
+        val now = System.currentTimeMillis()
+        val diff = now - timestamp
+
+        return when {
+            diff < TimeUnit.MINUTES.toMillis(1) -> "Hace unos segundos"
+            diff < TimeUnit.HOURS.toMillis(1) -> {
+                val minutes = TimeUnit.MILLISECONDS.toMinutes(diff)
+                "Hace $minutes minuto${if (minutes > 1) "s" else ""}"
+            }
+            diff < TimeUnit.DAYS.toMillis(1) -> {
+                val hours = TimeUnit.MILLISECONDS.toHours(diff)
+                "Hace $hours hora${if (hours > 1) "s" else ""}"
+            }
+            diff < TimeUnit.DAYS.toMillis(7) -> {
+                val days = TimeUnit.MILLISECONDS.toDays(diff)
+                "Hace $days día${if (days > 1) "s" else ""}"
+            }
+            else -> {
+                val date = Date(timestamp)
+                val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                format.format(date)
+            }
+        }
     }
 }

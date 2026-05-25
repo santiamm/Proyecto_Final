@@ -43,6 +43,7 @@
             android:orientation="vertical"
             android:gravity="center"
             android:padding="32dp">
+
             <TextView
                 android:id="@+id/tvInitial"
                 android:layout_width="80dp"
@@ -53,13 +54,47 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_marginBottom="16dp"/>
+
             <TextView
                 android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#182230"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="#64748b"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre de usuario"
+                app:hintTextColor="#2563eb"
+                android:layout_marginBottom="16dp"
+                app:boxBackgroundColor="#ffffff"
+                app:boxStrokeColor="#cbd5e1"
+                app:boxStrokeWidth="1dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#182230"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnGuardarNombre"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:backgroundTint="#2563eb"
+                android:text="Guardar nombre"
+                android:textColor="#ffffff"
+                app:cornerRadius="16dp"
+                android:layout_marginBottom="16dp"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,7 +102,6 @@
                 android:textColor="#16a34a"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:layout_marginTop="12dp"
                 android:background="#dcfce7"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="4dp" />

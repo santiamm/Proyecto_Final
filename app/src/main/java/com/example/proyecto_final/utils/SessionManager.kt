@@ -8,6 +8,9 @@ class SessionManager(context: Context) {
 
     fun saveLoginSession(email: String) {
         prefs.edit().putBoolean("IS_LOGGED_IN", true).putString("USER_EMAIL", email).apply()
+        if (getUserName().isEmpty()) {
+            saveUserName(email.split("@").first())
+        }
     }
 
     fun isLoggedIn(): Boolean {
@@ -16,6 +19,14 @@ class SessionManager(context: Context) {
 
     fun getUserEmail(): String {
         return prefs.getString("USER_EMAIL", "vecino@nodocivico.com") ?: "vecino@nodocivico.com"
+    }
+
+    fun saveUserName(name: String) {
+        prefs.edit().putString("USER_NAME", name).apply()
+    }
+
+    fun getUserName(): String {
+        return prefs.getString("USER_NAME", "Vecino") ?: "Vecino"
     }
 
     fun logout() {

@@ -73,7 +73,7 @@ class EditReportFragment : Fragment(R.layout.fragment_edit_report) {
                 priority = newPrio,
                 status = currentStatus,
                 isSynced = false,
-                timestamp = System.currentTimeMillis()
+                timestamp = arguments?.getLong("timestamp") ?: System.currentTimeMillis()
             )
 
             viewModel.updateReport(updatedReport) {
