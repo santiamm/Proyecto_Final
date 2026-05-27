@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
     <color name="primary_blue">#2563eb</color>
-    <color name="primary_blue_light">#e0e7ff</color>
+    <color name="primary_blue_dark">#1e40af</color>
     <color name="warning_orange">#f59e0b</color>
-    <color name="warning_orange_light">#fef3c7</color>
     <color name="success_green">#16a34a</color>
     <color name="success_green_light">#dcfce7</color>
-    <color name="muted_gray">#64748b</color>
-    <color name="muted_gray_light">#f1f5f9</color>
+    <color name="background_light">#eef3fb</color>
+    <color name="surface_light">#ffffff</color>
+    <color name="text_primary_light">#182230</color>
+    <color name="text_secondary_light">#64748b</color>
+    <color name="text_tertiary_light">#94a3b8</color>
+    <color name="status_bg_open">#e0e7ff</color>
+    <color name="status_bg_progress">#fef3c7</color>
+    <color name="status_bg_closed">#dcfce7</color>
+    <color name="status_text_open">#2563eb</color>
+    <color name="status_text_progress">#b45309</color>
+    <color name="status_text_closed">#16a34a</color>
 </resources>

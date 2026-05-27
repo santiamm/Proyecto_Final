@@ -1,15 +1,16 @@
 package com.example.proyecto_final
 
 import android.app.Application
-import com.example.proyecto_final.data.AppDatabase
-import com.example.proyecto_final.repository.AppRepository
+import com.example.proyecto_final.di.appModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class NodoCivicoApp : Application() {
-    lateinit var repository: AppRepository
-
     override fun onCreate() {
         super.onCreate()
-        val database = AppDatabase.getDatabase(this)
-        repository = AppRepository(database.userDao(), database.reportDao())
+        startKoin {
+            androidContext(this@NodoCivicoApp)
+            modules(appModule)
+        }
     }
 }

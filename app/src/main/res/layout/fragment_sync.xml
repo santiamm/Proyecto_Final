@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eef3fb"
+    android:background="@color/background_light"
     android:orientation="vertical"
     android:padding="24dp">
 
@@ -12,33 +13,40 @@
         android:layout_height="40dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@android:drawable/ic_menu_revert"
+        app:tint="@color/text_primary_light"
         android:layout_marginBottom="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sincronización API"
-        android:textColor="#182230"
+        android:textColor="@color/text_primary_light"
         android:textSize="22sp"
         android:textStyle="bold"
         android:layout_marginBottom="24dp" />
 
-    <TextView
-        android:id="@+id/tvSyncStatus"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="#ffffff"
-        android:gravity="center"
-        android:text="Pendientes de sincronización: 0"
-        android:textColor="#64748b"
-        android:textSize="16sp"
-        android:layout_marginBottom="24dp" />
+        style="@style/RoundedCardView"
+        android:layout_marginBottom="24dp"
+        app:cardUseCompatPadding="true">
+
+        <TextView
+            android:id="@+id/tvSyncStatus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Pendientes de sincronización: 0"
+            android:textColor="@color/text_secondary_light"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/btnSyncNow"
+        style="@style/RoundedButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:backgroundTint="#2563eb"
-        android:text="Sincronizar ahora"
-        android:textColor="#ffffff" />
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary_blue"
+        android:text="Sincronizar ahora" />
 </LinearLayout>

@@ -51,7 +51,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             }
 
             Toast.makeText(requireContext(), "Configuración aplicada", Toast.LENGTH_SHORT).show()
-            findNavController().navigateUp()
+            requireActivity().recreate()
         }
     }
 }

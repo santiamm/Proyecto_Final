@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eef3fb"
+    android:background="@color/background_light"
     android:orientation="vertical"
     android:padding="24dp">
 
@@ -12,6 +13,7 @@
         android:layout_height="40dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@android:drawable/ic_menu_revert"
+        app:tint="@color/text_primary_light"
         android:layout_marginBottom="16dp"/>
 
     <TextView
@@ -20,66 +22,90 @@
         android:text="Detalle del Reporte"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="#182230"
+        android:textColor="@color/text_primary_light"
         android:layout_marginBottom="24dp"/>
 
-    <TextView
-        android:id="@+id/tvDetalleTitulo"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#182230"
-        android:layout_marginBottom="8dp"/>
+        style="@style/RoundedCardView"
+        app:cardUseCompatPadding="true"
+        android:layout_marginBottom="24dp">
 
-    <TextView
-        android:id="@+id/tvDetalleDesc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#475569"
-        android:layout_marginBottom="8dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvDetalleTimestamp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="#94A3B8"
-        android:layout_marginBottom="32dp"/>
+            <TextView
+                android:id="@+id/tvDetalleTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary_light"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tvDetalleDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/text_secondary_light"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tvDetalleTimestamp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary_light"
+                android:layout_marginBottom="8dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/btnEnProceso"
+        style="@style/RoundedButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/warning_orange"
         android:text="Marcar en proceso"
-        android:backgroundTint="#f59e0b"
-        android:textColor="#ffffff"
         android:layout_marginBottom="12dp"/>
 
     <Button
         android:id="@+id/btnResolver"
+        style="@style/RoundedButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/success_green"
         android:text="Marcar como resuelto"
-        android:backgroundTint="#16a34a"
-        android:textColor="#ffffff"
         android:layout_marginBottom="12dp"/>
 
     <Button
         android:id="@+id/btnEditar"
+        style="@style/RoundedButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary_blue"
         android:text="Editar reporte"
-        android:backgroundTint="#2563eb"
-        android:textColor="#ffffff"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btnRecordatorio"
+        style="@style/RoundedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#8B5CF6"
+        android:text="Recordatorio"
         android:layout_marginBottom="12dp"/>
 
     <Button
         android:id="@+id/btnEliminar"
+        style="@style/RoundedButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Eliminar reporte"
+        android:layout_height="wrap_content"
         android:backgroundTint="#ef4444"
-        android:textColor="#ffffff"/>
+        android:text="Eliminar reporte"/>
 </LinearLayout>

@@ -1,39 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eef3fb"
-    android:orientation="vertical">
+    android:background="@color/background_light">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="24dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
 
-        <TextView
-            android:layout_width="0dp"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Nodo Cívico"
-            android:textColor="#182230"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary"
+            app:statusBarScrim="?attr/colorPrimary">
 
-        <ImageButton
-            android:id="@+id/btnSettings"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_settings"
-            app:tint="#182230" />
-    </LinearLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                android:background="@android:color/transparent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nodo Cívico"
+                        android:textColor="@color/text_primary_light"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btnSettings"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_settings"
+                        app:tint="@color/text_primary_light" />
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingTop="16dp"
         android:fillViewport="true">
 
         <LinearLayout
@@ -41,16 +71,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="24dp"
-            android:paddingBottom="24dp">
+            android:paddingBottom="32dp"
+            android:clipChildren="false"
+            android:clipToPadding="false">
 
+            <!-- Banner Nodo Cívico sin borde blanco -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/bannerNodo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@null"
-                app:cardCornerRadius="28dp"
-                app:cardElevation="12dp">
+                app:cardCornerRadius="24dp"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -128,11 +162,11 @@
                             android:padding="8dp"
                             android:background="@drawable/badge_white_transparent"
                             android:gravity="center" />
-
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Banner sin Internet -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/bannerNoInternet"
                 android:layout_width="match_parent"
@@ -140,8 +174,8 @@
                 android:layout_marginBottom="24dp"
                 android:visibility="gone"
                 app:cardBackgroundColor="#EF4444"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="4dp">
+                style="@style/RoundedCardView"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -168,13 +202,13 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Tarjeta resumen general -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardBackgroundColor="#ffffff"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="4dp">
+                style="@style/RoundedCardView"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -186,7 +220,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Resumen general"
-                        android:textColor="#182230"
+                        android:textColor="@color/text_primary_light"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="16dp" />
@@ -210,14 +244,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
-                                android:textColor="#2563eb"
+                                android:textColor="@color/primary_blue"
                                 android:textSize="28sp"
                                 android:textStyle="bold" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Totales"
-                                android:textColor="#64748b"
+                                android:textColor="@color/text_secondary_light"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -234,14 +268,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
-                                android:textColor="#f59e0b"
+                                android:textColor="@color/warning_orange"
                                 android:textSize="28sp"
                                 android:textStyle="bold" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Pendientes"
-                                android:textColor="#64748b"
+                                android:textColor="@color/text_secondary_light"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -258,14 +292,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
-                                android:textColor="#16a34a"
+                                android:textColor="@color/success_green"
                                 android:textSize="28sp"
                                 android:textStyle="bold" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Cerrados"
-                                android:textColor="#64748b"
+                                android:textColor="@color/text_secondary_light"
                                 android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -278,45 +312,41 @@
 
                         <Button
                             android:id="@+id/btnNuevoReporteHome"
-                            style="?attr/materialButtonOutlinedStyle"
+                            style="@style/RoundedButtonOutlined"
                             android:layout_width="0dp"
-                            android:layout_height="44dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginEnd="8dp"
-                            android:text="Nuevo reporte"
-                            android:textColor="#2563eb"
-                            app:strokeColor="#2563eb" />
+                            android:text="Nuevo reporte" />
 
                         <Button
                             android:id="@+id/btnVerReportesHome"
-                            style="?attr/materialButtonOutlinedStyle"
+                            style="@style/RoundedButtonOutlined"
                             android:layout_width="0dp"
-                            android:layout_height="44dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginStart="8dp"
-                            android:text="Ver reportes"
-                            android:textColor="#2563eb"
-                            app:strokeColor="#2563eb" />
+                            android:text="Ver reportes" />
                     </LinearLayout>
 
                     <Button
                         android:id="@+id/btnSyncHome"
+                        style="@style/RoundedButton"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:backgroundTint="#2563eb"
-                        android:text="Sincronizar"
-                        android:textColor="#FFFFFF" />
+                        android:backgroundTint="@color/primary_blue"
+                        android:text="Sincronizar" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Tarjeta estado offline -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardBackgroundColor="#ffffff"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="4dp">
+                style="@style/RoundedCardView"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -328,7 +358,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Estado offline"
-                        android:textColor="#182230"
+                        android:textColor="@color/text_primary_light"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -337,7 +367,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="La app guarda reportes localmente y marca los cambios pendientes de sincronización."
-                        android:textColor="#64748b"
+                        android:textColor="@color/text_secondary_light"
                         android:textSize="14sp" />
 
                     <TextView
@@ -345,37 +375,40 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:text="Accesos rápidos: Crear reporte, revisar estado, consultar recordatorios y ver zonas."
-                        android:textColor="#64748b"
+                        android:textColor="@color/text_secondary_light"
                         android:textSize="14sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Título de acciones principales -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="12dp"
                 android:text="Acciones principales"
-                android:textColor="#182230"
+                android:textColor="@color/text_primary_light"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+            <!-- Grid de acciones principales (tarjetas más grandes y con menos separación) -->
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
+                android:rowCount="2"
                 android:alignmentMode="alignMargins"
                 android:columnOrderPreserved="false">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardReportar"
                     android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_margin="6dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="140dp"
+                    android:layout_margin="4dp"
                     android:layout_columnWeight="1"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cardBackgroundColor="#ffffff"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp">
+                    style="@style/RoundedCardView"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -385,17 +418,17 @@
                         android:padding="12dp">
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:src="@android:drawable/ic_menu_edit"
-                            app:tint="#2563eb" />
+                            app:tint="@color/primary_blue" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="12dp"
                             android:text="Reportar"
-                            android:textColor="#182230"
-                            android:textSize="14sp"
+                            android:textColor="@color/text_primary_light"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -403,13 +436,13 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardHistorial"
                     android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_margin="6dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="140dp"
+                    android:layout_margin="4dp"
                     android:layout_columnWeight="1"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cardBackgroundColor="#ffffff"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp">
+                    style="@style/RoundedCardView"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -419,17 +452,17 @@
                         android:padding="12dp">
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:src="@android:drawable/ic_menu_recent_history"
-                            app:tint="#2563eb" />
+                            app:tint="@color/primary_blue" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="12dp"
                             android:text="Historial"
-                            android:textColor="#182230"
-                            android:textSize="14sp"
+                            android:textColor="@color/text_primary_light"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -437,13 +470,13 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardPerfil"
                     android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_margin="6dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="140dp"
+                    android:layout_margin="4dp"
                     android:layout_columnWeight="1"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cardBackgroundColor="#ffffff"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp">
+                    style="@style/RoundedCardView"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -453,17 +486,17 @@
                         android:padding="12dp">
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:src="@drawable/ic_profile"
-                            app:tint="#2563eb" />
+                            app:tint="@color/primary_blue" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="12dp"
                             android:text="Perfil"
-                            android:textColor="#182230"
-                            android:textSize="14sp"
+                            android:textColor="@color/text_primary_light"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -471,13 +504,13 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardConfig"
                     android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_margin="6dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="140dp"
+                    android:layout_margin="4dp"
                     android:layout_columnWeight="1"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cardBackgroundColor="#ffffff"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp">
+                    style="@style/RoundedCardView"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -487,22 +520,21 @@
                         android:padding="12dp">
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:src="@drawable/ic_settings"
-                            app:tint="#2563eb" />
+                            app:tint="@color/primary_blue" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="12dp"
                             android:text="Ajustes"
-                            android:textColor="#182230"
-                            android:textSize="14sp"
+                            android:textColor="@color/text_primary_light"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </GridLayout>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

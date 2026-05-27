@@ -8,9 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.R
 import com.example.proyecto_final.data.ReportEntity
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class ReportAdapter(
@@ -36,25 +33,24 @@ class ReportAdapter(
         holder.tvTitle.text = report.title
         holder.tvSubtitle.text = "${report.category} · ${report.priority}"
         holder.tvStatus.text = report.status
+        holder.tvTimestamp.text = getTimeAgo(report.timestamp)
 
         val statusColor = when (report.status) {
-            "Abierto" -> R.color.primary_blue
-            "En proceso" -> R.color.warning_orange
-            "Cerrado" -> R.color.success_green
-            else -> R.color.muted_gray
+            "Abierto" -> R.color.status_text_open
+            "En proceso" -> R.color.status_text_progress
+            "Cerrado" -> R.color.status_text_closed
+            else -> R.color.text_secondary_light
         }
         val bgColor = when (report.status) {
-            "Abierto" -> R.color.primary_blue_light
-            "En proceso" -> R.color.warning_orange_light
-            "Cerrado" -> R.color.success_green_light
-            else -> R.color.muted_gray_light
+            "Abierto" -> R.color.status_bg_open
+            "En proceso" -> R.color.status_bg_progress
+            "Cerrado" -> R.color.status_bg_closed
+            else -> R.color.surface_light
         }
         holder.tvStatus.setTextColor(ContextCompat.getColor(holder.itemView.context, statusColor))
         holder.tvStatus.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, bgColor))
 
         holder.tvInitial.text = report.title.take(1).uppercase()
-        holder.tvTimestamp.text = getTimeAgo(report.timestamp)
-
         holder.itemView.setOnClickListener { onItemClick(report) }
     }
 
@@ -68,7 +64,6 @@ class ReportAdapter(
     private fun getTimeAgo(timestamp: Long): String {
         val now = System.currentTimeMillis()
         val diff = now - timestamp
-
         return when {
             diff < TimeUnit.MINUTES.toMillis(1) -> "Hace unos segundos"
             diff < TimeUnit.HOURS.toMillis(1) -> {
@@ -84,8 +79,8 @@ class ReportAdapter(
                 "Hace $days día${if (days > 1) "s" else ""}"
             }
             else -> {
-                val date = Date(timestamp)
-                val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val date = java.util.Date(timestamp)
+                val format = java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault())
                 format.format(date)
             }
         }

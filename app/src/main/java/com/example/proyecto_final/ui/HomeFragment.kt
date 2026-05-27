@@ -11,30 +11,24 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.proyecto_final.NodoCivicoApp
 import com.example.proyecto_final.R
-import com.example.proyecto_final.viewmodel.AppViewModelFactory
 import com.example.proyecto_final.viewmodel.ReportViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private val viewModel: ReportViewModel by viewModels {
-        AppViewModelFactory((requireActivity().application as NodoCivicoApp).repository)
-    }
-
+    private val viewModel: ReportViewModel by viewModel()
     private lateinit var bannerNoInternet: View
 
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
             requireActivity().runOnUiThread { showInternetBanner(false) }
         }
-
         override fun onLost(network: Network) {
             requireActivity().runOnUiThread { showInternetBanner(true) }
         }
@@ -61,31 +55,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         view.findViewById<View>(R.id.cardHistorial).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_reportListFragment)
         }
-
         view.findViewById<View>(R.id.cardReportar).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_createReportFragment)
         }
-
         view.findViewById<View>(R.id.cardPerfil).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
         }
-
         view.findViewById<View>(R.id.cardConfig).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
         }
-
         view.findViewById<ImageButton>(R.id.btnSettings).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
         }
-
         view.findViewById<Button>(R.id.btnNuevoReporteHome).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_createReportFragment)
         }
-
         view.findViewById<Button>(R.id.btnVerReportesHome).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_reportListFragment)
         }
-
         view.findViewById<Button>(R.id.btnSyncHome).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_syncFragment)
         }
@@ -95,21 +82,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun checkInternetAndShowBanner() {
-        val isConnected = isNetworkAvailable()
-        showInternetBanner(!isConnected)
+        showInternetBanner(!isNetworkAvailable())
     }
 
     private fun isNetworkAvailable(): Boolean {
-        val connectivityManager = requireContext().getSystemService(ConnectivityManager::class.java)
+        val cm = requireContext().getSystemService(ConnectivityManager::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val network = connectivityManager.activeNetwork
-            val capabilities = connectivityManager.getNetworkCapabilities(network)
-            return capabilities != null && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
-                    || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
-                    || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET))
+            val network = cm.activeNetwork
+            val caps = cm.getNetworkCapabilities(network)
+            return caps != null && (caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                    || caps.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                    || caps.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET))
         } else {
-            val networkInfo = connectivityManager.activeNetworkInfo
-            return networkInfo != null && networkInfo.isConnected
+            val info = cm.activeNetworkInfo
+            return info != null && info.isConnected
         }
     }
 
@@ -118,16 +104,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun registerNetworkCallback() {
-        val connectivityManager = requireContext().getSystemService(ConnectivityManager::class.java)
-        val builder = NetworkRequest.Builder()
-        connectivityManager.registerNetworkCallback(builder.build(), networkCallback)
+        val cm = requireContext().getSystemService(ConnectivityManager::class.java)
+        cm.registerNetworkCallback(NetworkRequest.Builder().build(), networkCallback)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        val connectivityManager = requireContext().getSystemService(ConnectivityManager::class.java)
         try {
-            connectivityManager.unregisterNetworkCallback(networkCallback)
-        } catch (e: Exception) { }
+            val cm = requireContext().getSystemService(ConnectivityManager::class.java)
+            cm.unregisterNetworkCallback(networkCallback)
+        } catch (_: Exception) { }
     }
 }

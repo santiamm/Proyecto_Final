@@ -7,21 +7,17 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.proyecto_final.NodoCivicoApp
 import com.example.proyecto_final.R
 import com.example.proyecto_final.data.ReportEntity
-import com.example.proyecto_final.viewmodel.AppViewModelFactory
 import com.example.proyecto_final.viewmodel.ReportViewModel
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputEditText
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EditReportFragment : Fragment(R.layout.fragment_edit_report) {
 
-    private val viewModel: ReportViewModel by viewModels {
-        AppViewModelFactory((requireActivity().application as NodoCivicoApp).repository)
-    }
+    private val viewModel: ReportViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,6 +28,7 @@ class EditReportFragment : Fragment(R.layout.fragment_edit_report) {
         val currentCat = arguments?.getString("cat") ?: ""
         val currentPrio = arguments?.getString("prio") ?: ""
         val currentStatus = arguments?.getString("status") ?: "Abierto"
+        val timestamp = arguments?.getLong("timestamp") ?: System.currentTimeMillis()
 
         view.findViewById<ImageButton>(R.id.btnBackEditar).setOnClickListener {
             findNavController().navigateUp()
@@ -73,7 +70,7 @@ class EditReportFragment : Fragment(R.layout.fragment_edit_report) {
                 priority = newPrio,
                 status = currentStatus,
                 isSynced = false,
-                timestamp = arguments?.getLong("timestamp") ?: System.currentTimeMillis()
+                timestamp = timestamp
             )
 
             viewModel.updateReport(updatedReport) {

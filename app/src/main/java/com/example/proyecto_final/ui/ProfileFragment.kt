@@ -12,8 +12,10 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final.R
 import com.example.proyecto_final.utils.SessionManager
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -28,7 +30,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         tvEmail.text = userEmail
         etNombre.setText(userName)
-        updateInitial(userName)
+        tvInitial.text = if (userName.isNotEmpty()) userName.take(1).uppercase() else "?"
 
         view.findViewById<ImageButton>(R.id.btnBackPerfil).setOnClickListener {
             findNavController().navigateUp()
@@ -38,7 +40,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             val newName = etNombre.text.toString().trim()
             if (newName.isNotEmpty()) {
                 sessionManager.saveUserName(newName)
-                updateInitial(newName)
+                tvInitial.text = newName.take(1).uppercase()
                 Toast.makeText(requireContext(), "Nombre actualizado", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(), "El nombre no puede estar vacío", Toast.LENGTH_SHORT).show()
@@ -52,10 +54,5 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 .build()
             findNavController().navigate(R.id.loginFragment, null, navOptions)
         }
-    }
-
-    private fun updateInitial(name: String) {
-        val initial = if (name.isNotEmpty()) name.take(1).uppercase() else "?"
-        view?.findViewById<TextView>(R.id.tvInitial)?.text = initial
     }
 }

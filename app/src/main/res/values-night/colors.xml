@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_blue">#3b82f6</color>
+    <color name="primary_blue_dark">#1d4ed8</color>
+    <color name="warning_orange">#f97316</color>
+    <color name="success_green">#22c55e</color>
+    <color name="success_green_light">#112211</color>
+    <color name="background_light">#0f172a</color>
+    <color name="surface_light">#1e293b</color>
+    <color name="text_primary_light">#f8fafc</color>
+    <color name="text_secondary_light">#cbd5e1</color>
+    <color name="text_tertiary_light">#94a3b8</color>
+    <color name="status_bg_open">#1e293b</color>
+    <color name="status_bg_progress">#332211</color>
+    <color name="status_bg_closed">#112211</color>
+    <color name="status_text_open">#60a5fa</color>
+    <color name="status_text_progress">#fb923c</color>
+    <color name="status_text_closed">#4ade80</color>
+</resources>

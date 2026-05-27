@@ -7,20 +7,16 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.proyecto_final.NodoCivicoApp
 import com.example.proyecto_final.R
-import com.example.proyecto_final.viewmodel.AppViewModelFactory
 import com.example.proyecto_final.viewmodel.ReportViewModel
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.google.android.material.textfield.TextInputEditText
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateReportFragment : Fragment(R.layout.fragment_create_report) {
 
-    private val viewModel: ReportViewModel by viewModels {
-        AppViewModelFactory((requireActivity().application as NodoCivicoApp).repository)
-    }
+    private val viewModel: ReportViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,13 +31,10 @@ class CreateReportFragment : Fragment(R.layout.fragment_create_report) {
         val spinnerPrioridad = view.findViewById<MaterialAutoCompleteTextView>(R.id.spinnerPrioridad)
         val btnGuardar = view.findViewById<Button>(R.id.btnGuardarReporte)
 
-        spinnerCategoria.setAdapter(
-            ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, arrayOf("Alumbrado Público", "Vías e Infraestructura", "Seguridad Comunitaria", "Aseo Urbano"))
-        )
-
-        spinnerPrioridad.setAdapter(
-            ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, arrayOf("Baja", "Media", "Alta", "Crítica"))
-        )
+        spinnerCategoria.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line,
+            arrayOf("Alumbrado Público", "Vías e Infraestructura", "Seguridad Comunitaria", "Aseo Urbano")))
+        spinnerPrioridad.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line,
+            arrayOf("Baja", "Media", "Alta", "Crítica")))
 
         btnGuardar.setOnClickListener {
             val titulo = etTitulo.text.toString().trim()
