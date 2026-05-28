@@ -32,14 +32,22 @@ class SyncFragment : Fragment(R.layout.fragment_sync) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.allReports.collect { reports ->
-                    val pendientes = reports.count { it.status == "Abierto" }
+                    val pendientes = reports.count { !it.isSynced }
                     tvSyncStatus.text = "Pendientes de sincronización: $pendientes reportes locales"
                 }
             }
         }
 
         view.findViewById<Button>(R.id.btnSyncNow).setOnClickListener {
-            Toast.makeText(requireContext(), "Sincronizando con el servidor (Entregable 3)...", Toast.LENGTH_SHORT).show()
+            tvSyncStatus.text = "Sincronizando..."
+            viewModel.syncReports { success, detail ->
+                if (success) {
+                    Toast.makeText(requireContext(), "Sincronización completada", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "Sincronización parcial", Toast.LENGTH_SHORT).show()
+                }
+                tvSyncStatus.text = detail
+            }
         }
     }
 }

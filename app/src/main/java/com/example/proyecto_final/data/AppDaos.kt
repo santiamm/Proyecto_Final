@@ -37,4 +37,13 @@ interface ReportDao {
     // ✅ NUEVO MÉTODO UPDATE para edición completa
     @Update
     suspend fun updateReport(report: ReportEntity)
+
+    @Query("SELECT * FROM reports WHERE isSynced = 0 ORDER BY timestamp ASC")
+    suspend fun getUnsyncedReports(): List<ReportEntity>
+
+    @Query("UPDATE reports SET isSynced = 1, remoteId = :remoteId WHERE id = :reportId")
+    suspend fun markAsSynced(reportId: Int, remoteId: Int)
+
+    @Query("SELECT * FROM reports WHERE remoteId = :remoteId LIMIT 1")
+    suspend fun getReportByRemoteId(remoteId: Int): ReportEntity?
 }

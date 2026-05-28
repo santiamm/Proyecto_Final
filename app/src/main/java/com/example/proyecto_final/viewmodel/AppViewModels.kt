@@ -81,6 +81,16 @@ class ReportViewModel(
             onComplete()
         }
     }
+
+    fun syncReports(onComplete: (Boolean, String) -> Unit) {
+        viewModelScope.launch {
+            val result = mutex.withLock {
+                repository.syncReports()
+            }
+            val message = "Subidos: ${result.uploaded}, nuevos: ${result.downloaded}, actualizados: ${result.updated}, fallos: ${result.failed}"
+            onComplete(result.isSuccess, message)
+        }
+    }
 }
 
 class AuthViewModel(private val repository: AppRepository) : ViewModel() {

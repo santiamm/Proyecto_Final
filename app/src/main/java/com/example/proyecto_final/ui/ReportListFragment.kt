@@ -41,6 +41,8 @@ class ReportListFragment : Fragment(R.layout.fragment_report_list) {
                 putString("prio", report.priority)
                 putString("status", report.status)
                 putLong("timestamp", report.timestamp)
+                putInt("remoteId", report.remoteId)
+                putBoolean("isSynced", report.isSynced)
             }
             findNavController().navigate(R.id.action_reportListFragment_to_reportDetailFragment, bundle)
         }

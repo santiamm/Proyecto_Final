@@ -2,6 +2,8 @@ package com.example.proyecto_final.repository
 
 import com.example.proyecto_final.data.ReportDao
 import com.example.proyecto_final.data.ReportEntity
+import com.example.proyecto_final.data.SyncManager
+import com.example.proyecto_final.data.SyncResult
 import com.example.proyecto_final.data.UserDao
 import com.example.proyecto_final.data.UserEntity
 import kotlinx.coroutines.flow.Flow
@@ -33,4 +35,9 @@ class AppRepository(private val userDao: UserDao, private val reportDao: ReportD
 
     // ✅ NUEVO: actualizar reporte completo
     suspend fun updateReport(report: ReportEntity) = reportDao.updateReport(report)
+
+    suspend fun syncReports(): SyncResult {
+        val syncManager = SyncManager()
+        return syncManager.syncReports(reportDao)
+    }
 }

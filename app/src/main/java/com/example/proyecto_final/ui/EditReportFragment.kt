@@ -28,7 +28,7 @@ class EditReportFragment : Fragment(R.layout.fragment_edit_report) {
         val currentCat = arguments?.getString("cat") ?: ""
         val currentPrio = arguments?.getString("prio") ?: ""
         val currentStatus = arguments?.getString("status") ?: "Abierto"
-        val timestamp = arguments?.getLong("timestamp") ?: System.currentTimeMillis()
+        val remoteId = arguments?.getInt("remoteId") ?: 0
 
         view.findViewById<ImageButton>(R.id.btnBackEditar).setOnClickListener {
             findNavController().navigateUp()
@@ -70,7 +70,8 @@ class EditReportFragment : Fragment(R.layout.fragment_edit_report) {
                 priority = newPrio,
                 status = currentStatus,
                 isSynced = false,
-                timestamp = timestamp
+                timestamp = System.currentTimeMillis(),
+                remoteId = remoteId
             )
 
             viewModel.updateReport(updatedReport) {

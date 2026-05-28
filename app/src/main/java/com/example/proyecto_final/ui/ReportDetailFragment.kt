@@ -38,6 +38,8 @@ class ReportDetailFragment : Fragment(R.layout.fragment_report_detail) {
         val currentPrio = arguments?.getString("prio") ?: ""
         val currentStatus = arguments?.getString("status") ?: "Abierto"
         val timestamp = arguments?.getLong("timestamp") ?: System.currentTimeMillis()
+        val remoteId = arguments?.getInt("remoteId") ?: 0
+        val isSynced = arguments?.getBoolean("isSynced") ?: false
 
         view.findViewById<TextView>(R.id.tvDetalleTitulo).text = currentTitle
         view.findViewById<TextView>(R.id.tvDetalleDesc).text = currentDesc
@@ -76,6 +78,8 @@ class ReportDetailFragment : Fragment(R.layout.fragment_report_detail) {
                 putString("prio", currentPrio)
                 putString("status", currentStatus)
                 putLong("timestamp", timestamp)
+                putInt("remoteId", remoteId)
+                putBoolean("isSynced", isSynced)
             }
             findNavController().navigate(R.id.action_reportDetailFragment_to_editReportFragment, bundle)
         }

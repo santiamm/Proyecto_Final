@@ -11,5 +11,6 @@ data class ReportEntity(
     val priority: String,
     val status: String = "Abierto",
     val isSynced: Boolean = false,
-    val timestamp: Long = System.currentTimeMillis()
+    val timestamp: Long = System.currentTimeMillis(),
+    val remoteId: Int = 0
 )
