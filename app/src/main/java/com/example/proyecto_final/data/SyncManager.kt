@@ -4,8 +4,9 @@ import com.example.proyecto_final.model.RemoteReport
 import com.example.proyecto_final.network.RetrofitClient
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import android.content.Context
 
-class SyncManager {
+class SyncManager(private val context: Context) {
     private val mutex = Mutex()
     private val api = RetrofitClient.instance
 

@@ -16,6 +16,7 @@ import com.example.proyecto_final.ui.adapter.ReportAdapter
 import com.example.proyecto_final.viewmodel.ReportViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import android.widget.Button
 
 class ReportListFragment : Fragment(R.layout.fragment_report_list) {
 
@@ -30,6 +31,11 @@ class ReportListFragment : Fragment(R.layout.fragment_report_list) {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewReports)
         val tvEmpty = view.findViewById<TextView>(R.id.tvEmptyState)
+        val btnFiltroTodos = view.findViewById<Button>(R.id.btnFiltroTodos)
+        val btnFiltroAbiertos = view.findViewById<Button>(R.id.btnFiltroAbiertos)
+        val btnFiltroProceso = view.findViewById<Button>(R.id.btnFiltroProceso)
+        val btnFiltroCerrados = view.findViewById<Button>(R.id.btnFiltroCerrados)
+
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val adapter = ReportAdapter(emptyList()) { report ->
@@ -47,6 +53,21 @@ class ReportListFragment : Fragment(R.layout.fragment_report_list) {
             findNavController().navigate(R.id.action_reportListFragment_to_reportDetailFragment, bundle)
         }
         recyclerView.adapter = adapter
+        btnFiltroTodos.setOnClickListener {
+            viewModel.setFilter("Todos")
+        }
+
+        btnFiltroAbiertos.setOnClickListener {
+            viewModel.setFilter("Abiertos")
+        }
+
+        btnFiltroProceso.setOnClickListener {
+            viewModel.setFilter("En proceso")
+        }
+
+        btnFiltroCerrados.setOnClickListener {
+            viewModel.setFilter("Cerrados")
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {

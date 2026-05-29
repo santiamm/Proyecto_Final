@@ -7,8 +7,9 @@ import com.example.proyecto_final.data.SyncResult
 import com.example.proyecto_final.data.UserDao
 import com.example.proyecto_final.data.UserEntity
 import kotlinx.coroutines.flow.Flow
+import android.content.Context
 
-class AppRepository(private val userDao: UserDao, private val reportDao: ReportDao) {
+class AppRepository(private val userDao: UserDao, private val reportDao: ReportDao, private val context: Context ) {
 
     // Usuario
     suspend fun registerLocalUser(email: String, pass: String): Boolean {
@@ -37,7 +38,7 @@ class AppRepository(private val userDao: UserDao, private val reportDao: ReportD
     suspend fun updateReport(report: ReportEntity) = reportDao.updateReport(report)
 
     suspend fun syncReports(): SyncResult {
-        val syncManager = SyncManager()
+        val syncManager = SyncManager(context)
         return syncManager.syncReports(reportDao)
     }
 }

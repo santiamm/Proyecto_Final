@@ -7,12 +7,33 @@ import com.example.proyecto_final.viewmodel.ReportViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import org.koin.android.ext.koin.androidContext
+import androidx.lifecycle.SavedStateHandle
 
 val appModule = module {
+
     single { AppDatabase.getDatabase(androidContext()) }
+
     single { get<AppDatabase>().userDao() }
+
     single { get<AppDatabase>().reportDao() }
-    single { AppRepository(get(), get()) }
-    viewModel { ReportViewModel(get(), get()) }
-    viewModel { AuthViewModel(get()) }
+
+    single {
+        AppRepository(
+            get(),
+            get(),
+            androidContext()
+        )
+    }
+
+    viewModel {
+        ReportViewModel(
+            get(),
+            SavedStateHandle()
+        )
+    }
+
+    viewModel {
+        AuthViewModel(get())
+    }
 }

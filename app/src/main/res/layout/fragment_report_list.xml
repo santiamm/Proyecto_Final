@@ -16,8 +16,9 @@
 
         <ImageButton
             android:id="@+id/btnBackLista"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="Volver"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@android:drawable/ic_menu_revert"
             app:tint="@color/text_primary_light" />
@@ -41,6 +42,42 @@
         android:textColor="@color/text_secondary_light"
         android:textSize="16sp"
         android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp">
+
+        <Button
+            android:id="@+id/btnFiltroTodos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Todos" />
+
+        <Button
+            android:id="@+id/btnFiltroAbiertos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Abiertos"
+            android:layout_marginStart="8dp"/>
+
+        <Button
+            android:id="@+id/btnFiltroProceso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="En proceso"
+            android:layout_marginStart="8dp"/>
+
+        <Button
+            android:id="@+id/btnFiltroCerrados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cerrados"
+            android:layout_marginStart="48dp"/>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewReports"

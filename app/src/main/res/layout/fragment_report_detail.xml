@@ -9,8 +9,9 @@
 
     <ImageButton
         android:id="@+id/btnBackDetalle"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="Volver"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@android:drawable/ic_menu_revert"
         app:tint="@color/text_primary_light"

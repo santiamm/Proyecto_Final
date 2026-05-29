@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.R
 import com.example.proyecto_final.data.ReportEntity
 import java.util.concurrent.TimeUnit
+import android.widget.ImageView
 
 class ReportAdapter(
     private var reports: List<ReportEntity>,
@@ -21,6 +22,9 @@ class ReportAdapter(
         val tvSubtitle: TextView = itemView.findViewById(R.id.tvSubtitle)
         val tvStatus: TextView = itemView.findViewById(R.id.tvStatus)
         val tvTimestamp: TextView = itemView.findViewById(R.id.tvTimestamp)
+
+        val ivSyncIcon: ImageView =
+            itemView.findViewById(R.id.ivSyncIcon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportViewHolder {
@@ -34,6 +38,12 @@ class ReportAdapter(
         holder.tvSubtitle.text = "${report.category} · ${report.priority}"
         holder.tvStatus.text = report.status
         holder.tvTimestamp.text = getTimeAgo(report.timestamp)
+
+        if (!report.isSynced) {
+            holder.ivSyncIcon.visibility = View.VISIBLE
+        } else {
+            holder.ivSyncIcon.visibility = View.GONE
+        }
 
         val statusColor = when (report.status) {
             "Abierto" -> R.color.status_text_open

@@ -14,6 +14,7 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputEditText
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 class CreateReportFragment : Fragment(R.layout.fragment_create_report) {
 
     private val viewModel: ReportViewModel by viewModel()
