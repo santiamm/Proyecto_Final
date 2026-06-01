@@ -4,6 +4,8 @@ import com.example.proyecto_final.model.RemoteReport
 import com.example.proyecto_final.network.RetrofitClient
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import retrofit2.HttpException
+import java.io.IOException
 
 class SyncManager {
     private val mutex = Mutex()
@@ -15,6 +17,7 @@ class SyncManager {
             var downloaded = 0
             var updated = 0
             var failed = 0
+            val errors = mutableListOf<String>()
 
             val unsynced = reportDao.getUnsyncedReports()
             for (local in unsynced) {
@@ -29,20 +32,31 @@ class SyncManager {
                 )
 
                 try {
-                    val response = if (local.remoteId > 0) {
-                        api.updateReport(local.remoteId, payload)
-                    } else {
-                        api.createReport(payload)
+                    val response = runWithRetry {
+                        if (local.remoteId > 0) {
+                            try {
+                                api.updateReport(local.remoteId, payload)
+                            } catch (e: HttpException) {
+                                if (e.code() == 404) {
+                                    api.createReport(payload)
+                                } else {
+                                    throw e
+                                }
+                            }
+                        } else {
+                            api.createReport(payload)
+                        }
                     }
                     reportDao.markAsSynced(local.id, response.id)
                     uploaded++
-                } catch (_: Exception) {
+                } catch (e: Exception) {
                     failed++
+                    errors.add("No se pudo subir '${local.title}': ${readableError(e)}")
                 }
             }
 
             try {
-                val remoteReports = api.getReports()
+                val remoteReports = runWithRetry { api.getReports() }
                 for (remote in remoteReports) {
                     val existing = reportDao.getReportByRemoteId(remote.id)
                     if (existing == null) {
@@ -73,11 +87,38 @@ class SyncManager {
                         updated++
                     }
                 }
-            } catch (_: Exception) {
+            } catch (e: Exception) {
                 failed++
+                errors.add("No se pudieron descargar reportes: ${readableError(e)}")
             }
 
-            SyncResult(uploaded = uploaded, downloaded = downloaded, updated = updated, failed = failed)
+            SyncResult(
+                uploaded = uploaded,
+                downloaded = downloaded,
+                updated = updated,
+                failed = failed,
+                errorMessage = errors.joinToString("\n")
+            )
+        }
+    }
+
+    private suspend fun <T> runWithRetry(block: suspend () -> T): T {
+        var lastError: Exception? = null
+        repeat(2) {
+            try {
+                return block()
+            } catch (e: Exception) {
+                lastError = e
+            }
+        }
+        throw lastError ?: IllegalStateException("Error desconocido")
+    }
+
+    private fun readableError(error: Exception): String {
+        return when (error) {
+            is HttpException -> "HTTP ${error.code()}"
+            is IOException -> "sin conexión con el servidor"
+            else -> error.message ?: "error desconocido"
         }
     }
 }

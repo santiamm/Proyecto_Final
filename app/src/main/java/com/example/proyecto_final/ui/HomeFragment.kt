@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -27,10 +28,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
-            requireActivity().runOnUiThread { showInternetBanner(false) }
+            requireActivity().runOnUiThread {
+                if (!isAdded) return@runOnUiThread
+                showInternetBanner(false)
+                viewModel.syncReports { success, detail ->
+                    val title = if (success) "Sincronización automática completada" else "Sincronización automática parcial"
+                    Toast.makeText(requireContext(), "$title\n$detail", Toast.LENGTH_LONG).show()
+                }
+            }
         }
         override fun onLost(network: Network) {
-            requireActivity().runOnUiThread { showInternetBanner(true) }
+            requireActivity().runOnUiThread {
+                if (!isAdded) return@runOnUiThread
+                showInternetBanner(true)
+            }
         }
     }
 
@@ -44,10 +55,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.allReports.collect { reports ->
+                viewModel.allReportsRaw.collect { reports ->
                     tvTotales.text = reports.size.toString()
-                    tvPendientes.text = reports.count { it.status == "Abierto" || it.status == "En proceso" }.toString()
-                    tvSincronizados.text = reports.count { it.status == "Cerrado" }.toString()
+                    tvPendientes.text = reports.count { !it.isSynced }.toString()
+                    tvSincronizados.text = reports.count { it.isSynced }.toString()
                 }
             }
         }
@@ -75,6 +86,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         view.findViewById<Button>(R.id.btnSyncHome).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_syncFragment)
+        }
+        view.findViewById<Button>(R.id.btnRemindersHome).setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_calendarRemindersFragment)
         }
 
         checkInternetAndShowBanner()

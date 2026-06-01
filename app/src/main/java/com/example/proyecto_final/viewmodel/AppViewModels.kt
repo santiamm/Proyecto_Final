@@ -24,8 +24,11 @@ class ReportViewModel(
 
     val currentFilter: StateFlow<String> = savedStateHandle.getStateFlow(filterKey, "Todos")
 
+    val allReportsRaw: StateFlow<List<ReportEntity>> = repository.getAllReports()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
     val allReports: StateFlow<List<ReportEntity>> = combine(
-        repository.getAllReports(),
+        allReportsRaw,
         currentFilter
     ) { reports, filter ->
         when (filter) {
@@ -87,7 +90,8 @@ class ReportViewModel(
             val result = mutex.withLock {
                 repository.syncReports()
             }
-            val message = "Subidos: ${result.uploaded}, nuevos: ${result.downloaded}, actualizados: ${result.updated}, fallos: ${result.failed}"
+            val summary = "Subidos: ${result.uploaded}, nuevos: ${result.downloaded}, actualizados: ${result.updated}, fallos: ${result.failed}"
+            val message = if (result.errorMessage.isBlank()) summary else "$summary\n${result.errorMessage}"
             onComplete(result.isSuccess, message)
         }
     }

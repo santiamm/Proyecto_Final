@@ -27,13 +27,14 @@ class SyncFragment : Fragment(R.layout.fragment_sync) {
             findNavController().navigateUp()
         }
 
+        val tvSyncPending = view.findViewById<TextView>(R.id.tvSyncPending)
         val tvSyncStatus = view.findViewById<TextView>(R.id.tvSyncStatus)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.allReports.collect { reports ->
+                viewModel.allReportsRaw.collect { reports ->
                     val pendientes = reports.count { !it.isSynced }
-                    tvSyncStatus.text = "Pendientes de sincronización: $pendientes reportes locales"
+                    tvSyncPending.text = "Pendientes: $pendientes"
                 }
             }
         }

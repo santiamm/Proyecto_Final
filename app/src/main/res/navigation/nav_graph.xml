@@ -70,6 +70,13 @@
             app:exitAnim="@anim/zoom_out"
             app:popEnterAnim="@anim/pop_zoom_in"
             app:popExitAnim="@anim/pop_zoom_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_calendarRemindersFragment"
+            app:destination="@id/calendarRemindersFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popEnterAnim="@anim/pop_zoom_in"
+            app:popExitAnim="@anim/pop_zoom_out" />
     </fragment>
 
     <fragment
@@ -99,6 +106,10 @@
     <fragment
         android:id="@+id/syncFragment"
         android:name="com.example.proyecto_final.ui.SyncFragment" />
+
+    <fragment
+        android:id="@+id/calendarRemindersFragment"
+        android:name="com.example.proyecto_final.ui.CalendarRemindersFragment" />
 
     <fragment
         android:id="@+id/reportDetailFragment"

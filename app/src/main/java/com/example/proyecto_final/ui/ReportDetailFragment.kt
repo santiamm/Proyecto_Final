@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -63,9 +64,17 @@ class ReportDetailFragment : Fragment(R.layout.fragment_report_detail) {
 
         view.findViewById<Button>(R.id.btnEliminar).setOnClickListener {
             if (reportId != 0) {
-                viewModel.deleteReport(reportId)
-                Toast.makeText(requireContext(), "Reporte eliminado", Toast.LENGTH_SHORT).show()
-                findNavController().navigateUp()
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Eliminar reporte")
+                    .setMessage("¿Seguro que quieres eliminar este reporte?")
+                    .setNegativeButton("Cancelar", null)
+                    .setPositiveButton("Eliminar") { _, _ ->
+                        ReminderManager(requireContext()).cancelReminder(reportId)
+                        viewModel.deleteReport(reportId)
+                        Toast.makeText(requireContext(), "Reporte eliminado", Toast.LENGTH_SHORT).show()
+                        findNavController().navigateUp()
+                    }
+                    .show()
             }
         }
 
@@ -104,14 +113,14 @@ class ReportDetailFragment : Fragment(R.layout.fragment_report_detail) {
         try {
             val datePicker = DatePickerDialog(
                 requireContext(),
-                0,
+                R.style.CustomDatePickerDialog,
                 { _, year, month, dayOfMonth ->
                     val selectedDate = Calendar.getInstance().apply {
                         set(year, month, dayOfMonth)
                     }
                     TimePickerDialog(
                         requireContext(),
-                        0,
+                        R.style.CustomTimePickerDialog,
                         { _, hourOfDay, minute ->
                             selectedDate.set(Calendar.HOUR_OF_DAY, hourOfDay)
                             selectedDate.set(Calendar.MINUTE, minute)
