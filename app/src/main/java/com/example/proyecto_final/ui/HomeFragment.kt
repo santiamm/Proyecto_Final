@@ -25,6 +25,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val viewModel: ReportViewModel by viewModel()
     private lateinit var bannerNoInternet: View
+    private lateinit var tvPendingSyncCount: TextView
 
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
@@ -52,13 +53,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val tvPendientes = view.findViewById<TextView>(R.id.tvPendientes)
         val tvSincronizados = view.findViewById<TextView>(R.id.tvSincronizados)
         bannerNoInternet = view.findViewById(R.id.bannerNoInternet)
+        tvPendingSyncCount = view.findViewById(R.id.tvPendingSyncCount)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.allReportsRaw.collect { reports ->
                     tvTotales.text = reports.size.toString()
-                    tvPendientes.text = reports.count { !it.isSynced }.toString()
+                    val pendingSync = reports.count { !it.isSynced }
+                    tvPendientes.text = pendingSync.toString()
                     tvSincronizados.text = reports.count { it.isSynced }.toString()
+                    tvPendingSyncCount.text = "Pendientes de sincronización: $pendingSync"
                 }
             }
         }

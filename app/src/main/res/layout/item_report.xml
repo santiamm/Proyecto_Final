@@ -68,5 +68,15 @@
             android:paddingHorizontal="10dp"
             android:paddingVertical="6dp"
             android:background="@drawable/status_bg" />
+
+        <ImageView
+            android:id="@+id/ivSyncIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@android:drawable/stat_notify_sync"
+            app:tint="@android:color/holo_orange_dark"
+            android:visibility="gone"
+            android:layout_marginStart="8dp"/>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

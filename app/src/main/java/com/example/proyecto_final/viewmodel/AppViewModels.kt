@@ -32,9 +32,16 @@ class ReportViewModel(
         currentFilter
     ) { reports, filter ->
         when (filter) {
-            "Abiertos" -> reports.filter { it.status == "Abierto" }
-            "En proceso" -> reports.filter { it.status == "En proceso" }
-            "Cerrados" -> reports.filter { it.status == "Cerrado" }
+            "Abiertos" -> reports.filter {
+                it.status.equals("Abierto", true)
+            }
+            "En proceso" -> reports.filter {
+                it.status.equals("En proceso", true)
+            }
+
+            "Cerrados" -> reports.filter {
+                it.status.equals("Cerrado", true)
+            }
             else -> reports
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())

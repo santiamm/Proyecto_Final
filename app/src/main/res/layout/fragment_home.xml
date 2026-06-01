@@ -49,6 +49,7 @@
                         android:id="@+id/btnSettings"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
+                        android:contentDescription="Vol"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_settings"
                         app:tint="@color/text_primary_light" />
@@ -328,6 +329,16 @@
                             android:layout_marginStart="8dp"
                             android:text="Ver reportes" />
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvPendingSyncCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pendientes de sincronización: 0"
+                        android:textColor="@color/text_secondary_light"
+                        android:textSize="14sp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="8dp"/>
 
                     <Button
                         android:id="@+id/btnSyncHome"
