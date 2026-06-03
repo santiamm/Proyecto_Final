@@ -38,55 +38,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="4">
 
         <Button
             android:id="@+id/btnFilterTodos"
             style="@style/RoundedButtonOutlined"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="4dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:minHeight="48dp"
-            android:paddingHorizontal="4dp"
+            android:layout_marginEnd="4dp"
+            android:paddingHorizontal="2dp"
             android:text="Todos"
-            android:textSize="12sp" />
+            android:textSize="11sp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
 
         <Button
             android:id="@+id/btnFilterAbiertos"
             style="@style/RoundedButtonOutlined"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="4dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:minHeight="48dp"
-            android:paddingHorizontal="4dp"
+            android:layout_marginHorizontal="2dp"
+            android:paddingHorizontal="2dp"
             android:text="Abiertos"
-            android:textSize="12sp" />
+            android:textSize="11sp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
 
         <Button
             android:id="@+id/btnFilterProceso"
             style="@style/RoundedButtonOutlined"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="4dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:minHeight="48dp"
-            android:paddingHorizontal="4dp"
+            android:layout_marginHorizontal="2dp"
+            android:paddingHorizontal="2dp"
             android:text="Proceso"
-            android:textSize="12sp" />
+            android:textSize="11sp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
 
         <Button
             android:id="@+id/btnFilterCerrados"
             style="@style/RoundedButtonOutlined"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="4dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:minHeight="48dp"
-            android:paddingHorizontal="4dp"
+            android:layout_marginStart="4dp"
+            android:paddingHorizontal="2dp"
             android:text="Cerrados"
-            android:textSize="12sp" />
+            android:textSize="11sp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
     </LinearLayout>
 
     <ProgressBar

@@ -330,15 +330,25 @@
                             android:text="Ver reportes" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvPendingSyncCount"
-                        android:layout_width="wrap_content"
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Pendientes de sincronización: 0"
-                        android:textColor="@color/text_secondary_light"
-                        android:textSize="14sp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginTop="16dp"
+                        app:cardBackgroundColor="@color/status_bg_progress"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:id="@+id/tvPendingSyncCount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Pendientes de sincronización: 0"
+                            android:textColor="@color/status_text_progress"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:padding="12dp"
+                            android:gravity="center" />
+                    </androidx.cardview.widget.CardView>
 
                     <Button
                         android:id="@+id/btnSyncHome"

@@ -27,17 +27,18 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        android:minHeight="160dp"
         style="@style/RoundedCardView"
         android:layout_marginBottom="24dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/tvSyncPending"
@@ -46,18 +47,26 @@
                 android:gravity="center"
                 android:text="Pendientes: 0"
                 android:textColor="@color/primary_blue"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/progressSync"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="16dp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvSyncStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:gravity="center"
-                android:text="Sin sincronizaciones recientes"
+                android:text="Listo para sincronizar"
                 android:textColor="@color/text_secondary_light"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:lineSpacingExtra="4dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

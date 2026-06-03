@@ -65,7 +65,10 @@ class ReportListFragment : Fragment(R.layout.fragment_report_list) {
         filterButtons.forEach { (filter, button) ->
             button.setOnClickListener { applyFilter(filter) }
         }
-        applyFilter(prefs.getString("filtro", "Todos") ?: "Todos")
+        
+        // Cargar filtro guardado al iniciar
+        val savedFilter = prefs.getString("filtro", "Todos") ?: "Todos"
+        viewModel.setFilter(savedFilter)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 

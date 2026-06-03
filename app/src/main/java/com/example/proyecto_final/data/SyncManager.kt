@@ -104,11 +104,12 @@ class SyncManager {
 
     private suspend fun <T> runWithRetry(block: suspend () -> T): T {
         var lastError: Exception? = null
-        repeat(2) {
+        repeat(3) { attempt ->
             try {
                 return block()
             } catch (e: Exception) {
                 lastError = e
+                if (attempt < 2) kotlinx.coroutines.delay(1000L * (attempt + 1))
             }
         }
         throw lastError ?: IllegalStateException("Error desconocido")
@@ -116,9 +117,16 @@ class SyncManager {
 
     private fun readableError(error: Exception): String {
         return when (error) {
-            is HttpException -> "HTTP ${error.code()}"
-            is IOException -> "sin conexión con el servidor"
-            else -> error.message ?: "error desconocido"
+            is HttpException -> {
+                when (error.code()) {
+                    401 -> "error de autenticación"
+                    404 -> "recurso no encontrado en servidor"
+                    500 -> "error interno del servidor"
+                    else -> "error del servidor (HTTP ${error.code()})"
+                }
+            }
+            is IOException -> "sin conexión con el servidor (revisa tu internet)"
+            else -> error.message ?: "error inesperado"
         }
     }
 }

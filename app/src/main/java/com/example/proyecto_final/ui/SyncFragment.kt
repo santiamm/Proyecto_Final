@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -29,6 +30,8 @@ class SyncFragment : Fragment(R.layout.fragment_sync) {
 
         val tvSyncPending = view.findViewById<TextView>(R.id.tvSyncPending)
         val tvSyncStatus = view.findViewById<TextView>(R.id.tvSyncStatus)
+        val progressSync = view.findViewById<View>(R.id.progressSync)
+        val btnSyncNow = view.findViewById<Button>(R.id.btnSyncNow)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -39,13 +42,20 @@ class SyncFragment : Fragment(R.layout.fragment_sync) {
             }
         }
 
-        view.findViewById<Button>(R.id.btnSyncNow).setOnClickListener {
-            tvSyncStatus.text = "Sincronizando..."
+        btnSyncNow.setOnClickListener {
+            tvSyncStatus.text = "Sincronizando con el servidor..."
+            progressSync.visibility = View.VISIBLE
+            btnSyncNow.isEnabled = false
+            
             viewModel.syncReports { success, detail ->
+                progressSync.visibility = View.GONE
+                btnSyncNow.isEnabled = true
                 if (success) {
+                    tvSyncStatus.setTextColor(ContextCompat.getColor(requireContext(), R.color.success_green))
                     Toast.makeText(requireContext(), "Sincronización completada", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(requireContext(), "Sincronización parcial", Toast.LENGTH_SHORT).show()
+                    tvSyncStatus.setTextColor(ContextCompat.getColor(requireContext(), R.color.warning_orange))
+                    Toast.makeText(requireContext(), "Sincronización con errores", Toast.LENGTH_SHORT).show()
                 }
                 tvSyncStatus.text = detail
             }
