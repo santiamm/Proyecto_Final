@@ -30,15 +30,19 @@
         <item name="android:insetBottom">0dp</item>
     </style>
 
-    <style name="CustomDatePickerDialog" parent="Theme.AppCompat.Light.Dialog">
+    <style name="CustomDatePickerDialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
         <item name="colorAccent">@color/primary_blue</item>
         <item name="android:textColorPrimary">@color/text_primary_light</item>
-        <item name="android:background">@color/surface_light</item>
+        <item name="android:textColorSecondary">@color/text_secondary_light</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/Widget.MaterialComponents.Button.TextButton</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/Widget.MaterialComponents.Button.TextButton</item>
     </style>
 
-    <style name="CustomTimePickerDialog" parent="Theme.AppCompat.Light.Dialog">
+    <style name="CustomTimePickerDialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
         <item name="colorAccent">@color/primary_blue</item>
         <item name="android:textColorPrimary">@color/text_primary_light</item>
-        <item name="android:background">@color/surface_light</item>
+        <item name="android:textColorSecondary">@color/text_secondary_light</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/Widget.MaterialComponents.Button.TextButton</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/Widget.MaterialComponents.Button.TextButton</item>
     </style>
 </resources>
