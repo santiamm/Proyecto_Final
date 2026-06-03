@@ -6,6 +6,9 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/.idea/codeStyles/
+/.idea/markdown.xml
+/.idea/studiobot.xml
 
 # Local SDK and build output
 .gradle/
