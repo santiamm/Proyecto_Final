@@ -20,3 +20,4 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         }, 2000)
     }
 }
+

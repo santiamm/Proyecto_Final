@@ -66,7 +66,7 @@ class ReportListFragment : Fragment(R.layout.fragment_report_list) {
             button.setOnClickListener { applyFilter(filter) }
         }
         
-        // Cargar filtro guardado al iniciar
+
         val savedFilter = prefs.getString("filtro", "Todos") ?: "Todos"
         viewModel.setFilter(savedFilter)
 

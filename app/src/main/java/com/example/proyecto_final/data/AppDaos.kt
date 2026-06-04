@@ -29,12 +29,12 @@ interface ReportDao {
     suspend fun updateReportStatus(reportId: Int, newStatus: String)
 
     @Delete
-    suspend fun deleteReport(report: ReportEntity)   // nuevo método opcional
+    suspend fun deleteReport(report: ReportEntity)
 
     @Query("DELETE FROM reports WHERE id = :reportId")
     suspend fun deleteReportById(reportId: Int)
 
-    // ✅ NUEVO MÉTODO UPDATE para edición completa
+
     @Update
     suspend fun updateReport(report: ReportEntity)
 
